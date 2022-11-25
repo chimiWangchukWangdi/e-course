@@ -53,7 +53,7 @@
           </p>
         </div>
         <div class="col-md-12 mb-3">
-          <label>Course detail</label>
+          <label>Course Detail</label>
           <input type="text" formControlName="description" class="form-control" />
         </div>
       </div>
@@ -83,10 +83,10 @@
             required
           />
           <!-- errors-->
-          <p *ngIf="mobileNumber?.touched && mobileNumber?.invalid" class="error">
+          <p *ngIf="range?.touched && range?.invalid" class="error">
             <sup>*</sup>Please provide contact number
           </p>
-          <p *ngIf="mobileNumber?.errors?.['pattern']" class="error">
+          <p *ngIf="range?.errors?.['pattern']" class="error">
             <sup>*</sup>Use numbers only number
           </p>
         </div>

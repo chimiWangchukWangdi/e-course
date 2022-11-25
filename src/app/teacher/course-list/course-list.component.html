@@ -45,7 +45,7 @@
     <img src="assets/preloader.gif" class="preloader-icon" alt="No course" />
   </div>
   <div class="no-data text-center" *ngIf="noData">
-    <img src="assets/no-course.svg" class="nodata-msg" alt="No course" />
+    <!-- <img src="assets/no-course.svg" class="nodata-msg" alt="No course" /> -->
     <p class="nodata-msg">No course added yet!</p>
     <a routerLink="/register-course" class="btn btn-success"> Add Course </a>
   </div>
@@ -57,6 +57,7 @@
         <tr>
           <th scope="col">Course Name</th>
           <th scope="col">Course Description</th>
+          <th scope="col">Course Creator</th>
           <th scope="col">Number of Students</th>
           <th scope="col">Range</th>
           <th class="text-center" scope="col">Edit</th>
@@ -73,6 +74,7 @@
           <!-- <th scope="row">{{ course.$key }}</th> -->
           <th scope="row">{{ course.courseTitle }} </th>
           <td>{{ course.description }}</td>
+          <td>{{ course.creator }}</td>
           <td>{{ course.noOfStudents }}</td>
           <td>{{ course.range }}</td>
           <td class="text-center action-block">

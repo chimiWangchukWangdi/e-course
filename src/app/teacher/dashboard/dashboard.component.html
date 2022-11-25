@@ -18,8 +18,8 @@
           <i class="fas fa-user"></i>My Courses
         </a>
       </li>
-      <!-- Calling SignOut() Api from AuthService -->
-      <li class="nav-item">
+      Calling SignOut() Api from AuthService -->
+      <!-- <li class="nav-item">
         <a class="nav-link" (click)="authService.SignOut()">
           <i class="fas fa-sign-out-alt"></i>Log out
         </a>
@@ -57,6 +57,7 @@
         <tr>
           <th scope="col">Course Name</th>
           <th scope="col">Course Description</th>
+          <th scope="col">Course Creator</th>
           <th scope="col">Number of Students</th>
           <th scope="col">Range</th>
           <th class="text-center" scope="col">Edit</th>
@@ -73,6 +74,7 @@
           <!-- <th scope="row">{{ course.$key }}</th> -->
           <th scope="row">{{ course.courseTitle }} </th>
           <td>{{ course.description }}</td>
+          <td>{{ course.creator }}</td>
           <td>{{ course.noOfStudents }}</td>
           <td>{{ course.range }}</td>
           <td class="text-center action-block">

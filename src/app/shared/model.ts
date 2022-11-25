@@ -10,6 +10,7 @@ export interface Course {
   $key: string;
   courseTitle: string;
   description: string;
+  creator: string;
   noOfStudents: string
   range: Number;
 }

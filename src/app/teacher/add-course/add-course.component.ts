@@ -10,6 +10,8 @@ import { CourseApiService } from 'src/app/services/course.api.service';
 })
 export class AddCourseComponent implements OnInit {
 
+
+
   public courseForm!: FormGroup;
   constructor(
     public crudApi: CourseApiService,
@@ -40,17 +42,18 @@ export class AddCourseComponent implements OnInit {
   get courseDetail() {
     return this.courseForm?.get('description');
   }
-  get email() {
-    return this.courseForm?.get('email');
+  get noOfStudents() {
+    return this.courseForm?.get('noOfStudents');
   }
-  get mobileNumber() {
-    return this.courseForm?.get('mobileNumber');
+  get range() {
+    return this.courseForm?.get('range');
   }
   ResetForm() {
     this.courseForm?.reset();
   }
   submitCourseData() {
-    this.crudApi.AddCourse(this.courseForm?.value);
+    const courseCreator: string = this.authService.userData.uid
+    this.crudApi.AddCourse(this.courseForm?.value, courseCreator);
     // this.toastr.success(
     //   this.studentForm?.controls['courseTitle'].value + ' successfully added!'
     // );

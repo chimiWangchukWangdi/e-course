@@ -38,6 +38,9 @@ export class EditCourseComponent implements OnInit {
   get description() {
     return this.editForm?.get('description');
   }
+  get creator() {
+    return this.editForm?.get('creator');
+  }
   get noOfStudents() {
     return this.editForm?.get('noOfStudents');
   }
@@ -48,6 +51,7 @@ export class EditCourseComponent implements OnInit {
     this.editForm = this.fb.group({
       courseTitle: ['', [Validators.required, Validators.minLength(2)]],
       description: [''],
+      creator: [''],
       noOfStudents: ['',[Validators.required]],
       range: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
     });
