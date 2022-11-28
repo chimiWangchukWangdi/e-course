@@ -1,69 +1,58 @@
+<div class="dashboard">
 <!-- Sidebar navigation -->
-<nav class="col-md-2 d-md-block bg-light sidebar">
+<nav class="side-nav">
   <h1><a routerLink="/teacher/dashboard" style="text-decoration: none">Dashboard</a></h1>
-  <div class="sidebar-sticky">
-    <ul class="nav flex-column">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/teacher/profile">
-          <i class="fas fa-user"></i>Teacher Profile
+  <div class="nav-items">
+    <ul class="ul-list">
+      <li >
+        <a  routerLink="/teacher/profile">
+          <i ></i>Teacher Profile
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/teacher/register-course" >
-          <i class="fas fa-user"></i>Add Course
+      <li >
+        <a  routerLink="/teacher/register-course" >
+          <i ></i>Add Course
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link active" routerLink="/teacher/view-courses">
-          <i class="fas fa-user"></i>My Courses
+      <li >
+        <a  routerLink="/teacher/view-courses">
+          <i ></i>My Courses
         </a>
       </li>
-      Calling SignOut() Api from AuthService -->
-      <!-- <li class="nav-item">
-        <a class="nav-link" (click)="authService.SignOut()">
-          <i class="fas fa-sign-out-alt"></i>Log out
+      <!-- Calling SignOut() Api from AuthService -->
+      <li >
+        <a  (click)="authService.SignOut()">
+          <i ></i>Log out
         </a>
       </li>
     </ul>
   </div>
 </nav>
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-<div
-  class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
->
-  <h2 class="h2">Courses List</h2>
-  <!-- <a
-    routerLink="/register-course"
-    class="btn btn-success"
-    *ngIf="hideWhenNoCourse"
-  >
-    Add Courses
-  </a> -->
+<main class="main">
+<div class="header">
+  <h2 >Courses List</h2>
+    <a href="" routerLink="/register-course"
+    *ngIf="hideWhenNoCourse">Add Courses</a>
 </div>
-<div class="pricing-header mx-auto">
-  <div class="no-data text-center" *ngIf="preLoader">
-    <img src="assets/preloader.gif" class="preloader-icon" alt="No course" />
+<div class="content">
+  <div  *ngIf="preLoader">
+    <img src="assets/preloader.gif"  alt="No course" />
   </div>
-  <div class="no-data text-center" *ngIf="noData">
-    <img src="assets/no-course.svg" class="nodata-msg" alt="No course" />
-    <p class="nodata-msg">No course added yet!</p>
-    <a routerLink="/register-course" class="btn btn-success"> Add Course </a>
+  <div  *ngIf="noData">
+    <img src="assets/no-course.svg"  alt="No course" />
+    <p >No course added yet!</p>
+    <a routerLink="/register-course" > Add Course </a>
   </div>
-  <div class="table-responsive" *ngIf="hideWhenNoCourse">
-    <table
-      class="table table-bordered table-responsive-sm table-responsive-md table-responsive-lg"
-    >
-      <thead>
+  <div class="table" *ngIf="hideWhenNoCourse">
+    <table>
         <tr>
-          <th scope="col">Course Name</th>
-          <th scope="col">Course Description</th>
-          <th scope="col">Course Creator</th>
-          <th scope="col">Number of Students</th>
-          <th scope="col">Range</th>
-          <th class="text-center" scope="col">Edit</th>
+          <th>Course Name</th>
+          <th>Course Description</th>
+          <th>Course Creator</th>
+          <th>Number of Students</th>
+          <th>Range</th>
+          <th>Edit</th>
         </tr>
-      </thead>
-      <tbody>
         <tr
           *ngFor="
             let course of Course!
@@ -72,27 +61,28 @@
           "
         >
           <!-- <th scope="row">{{ course.$key }}</th> -->
-          <th scope="row">{{ course.courseTitle }} </th>
+          <td>{{ course.courseTitle }} </td>
           <td>{{ course.description }}</td>
           <td>{{ course.creator }}</td>
           <td>{{ course.noOfStudents }}</td>
           <td>{{ course.range }}</td>
-          <td class="text-center action-block">
+          <td >
             <span
-              class="mr-2 btn btn-outline-primary btn-sm"
+
               routerLink="/teacher/edit-course/{{ course.$key }}"
               >Edit</span
             >
             <span
-              class="btn btn-outline-danger btn-sm"
+
               (click)="deleteCourse(course)"
               >Delete</span
             >
           </td>
         </tr>
-      </tbody>
     </table>
   </div>
   <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </div>
 </main>
+
+</div>

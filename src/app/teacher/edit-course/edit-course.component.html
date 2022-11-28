@@ -1,125 +1,121 @@
-<div
-  class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
->
+<div class="dashboard">
 <!-- Sidebar navigation -->
-<div class="container-fluid">
-  <div class="row">
-    <nav class="col-md-2 d-md-block bg-light sidebar">
-      <h1><a routerLink="/teacher/dashboard" style="text-decoration: none">Dashboard</a></h1>
-      <div class="sidebar-sticky">
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link active" routerLink="/teacher/pashboard">
-              <i class="fas fa-user"></i>Teacher Profile
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/teacher/register-course" >
-              <i class="fas fa-user"></i>Add Course
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/teacher/view-courses">
-              <i class="fas fa-user"></i>My Courses
-            </a>
-          </li>
-          <!-- Calling SignOut() Api from AuthService -->
-          <li class="nav-item">
-            <a class="nav-link" (click)="authService.SignOut()">
-              <i class="fas fa-sign-out-alt"></i>Log out
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+<nav class="side-nav">
+  <h1><a routerLink="/teacher/dashboard" style="text-decoration: none">Dashboard</a></h1>
+  <div class="nav-items">
+    <ul class="ul-list">
+      <li >
+        <a  routerLink="/teacher/profile">
+          <i ></i>Teacher Profile
+        </a>
+      </li>
+      <li >
+        <a  routerLink="/teacher/register-course" >
+          <i ></i>Add Course
+        </a>
+      </li>
+      <li >
+        <a  routerLink="/teacher/view-courses">
+          <i ></i>My Courses
+        </a>
+      </li>
+      <!-- Calling SignOut() Api from AuthService -->
+      <li >
+        <a  (click)="authService.SignOut()">
+          <i ></i>Log out
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<main role="main" >
 
-  <h1 class="h2">Edit Student Details</h1>
-  <div class="btn-toolbar mb-2 mb-md-0">
-    <div class="btn-group">
-      <button class="btn btn-sm btn-outline-secondary" (click)="goBack()">
+  <h1 >Edit Student Details</h1>
+  <div >
+    <div >
+      <button  (click)="goBack()">
         Go Back
       </button>
     </div>
   </div>
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="pricing-header form-block mx-auto">
+  <div >
+    <div >
+      <div >
         <form [formGroup]="editForm" (ngSubmit)="updateForm()" novalidate>
-          <div class="row">
-            <div class="col-lg-5 col-md-12 col-sm-12">
-              <div class="row">
-                <div class="col-md-12 mb-3">
+          <div >
+            <div >
+              <div >
+                <div >
                   <label>Course Title</label>
                   <input
                     type="text"
                     formControlName="courseTitle"
-                    class="form-control"
+
                     required
                   />
-                  <p *ngIf="courseTitle?.touched && courseTitle?.invalid" class="error">
+                  <p *ngIf="courseTitle?.touched && courseTitle?.invalid" >
                     <sup>*</sup>Please enter course title
                   </p>
-                  <p *ngIf="courseTitle?.errors?.['minlength']" class="error">
+                  <p *ngIf="courseTitle?.errors?.['minlength']" >
                     <sup>*</sup>Title shouldn't be less than 2 words
                   </p>
                 </div>
-                <div class="col-md-12 mb-3">
+                <div>
                   <label>Description</label>
                   <input
                     type="text"
                     formControlName="description"
-                    class="form-control"
+
                   />
                 </div>
-                <div class="col-md-12 mb-3">
+                <div >
                   <label>Creator</label>
                   <input
                     type="text"
                     formControlName="creator"
-                    class="form-control"
+
                   />
                 </div>
               </div>
-              <div class="row">
-                <div class="col-md-12 mb-3">
+              <div >
+                <div >
                   <label>No of Students Enrolled</label>
                   <input
                     type="number"
                     formControlName="noOfStudents"
-                    class="form-control"
+
                     required
                   />
-                  <p *ngIf="noOfStudents?.touched && noOfStudents?.invalid" class="error">
+                  <p *ngIf="noOfStudents?.touched && noOfStudents?.invalid" >
                     <sup>*</sup>Please provide no of students
                   </p>
-                  <p *ngIf="noOfStudents?.errors?.['pattern']" class="error">
+                  <p *ngIf="noOfStudents?.errors?.['pattern']">
                     <sup>*</sup>Please enter correct no
                   </p>
                 </div>
-                <div class="col-md-12 mb-3">
+                <div >
                   <label>Range</label>
                   <input
                     type="text"
                     formControlName="range"
-                    class="form-control"
+
                     required
                   />
                   <p
                     *ngIf="range?.touched && range?.invalid"
-                    class="error"
+
                   >
                     <sup>*</sup>Please provide range
                   </p>
-                  <p *ngIf="range?.errors?.['pattern']" class="error">
+                  <p *ngIf="range?.errors?.['pattern']" >
                     <sup>*</sup>Use numbers only number
                   </p>
                 </div>
               </div>
-              <div class="form-group text-right">
+              <div >
                 <button
                   type="submit"
-                  class="btn btn-success btn-block"
+
                   [disabled]="!editForm.valid"
                 >
                   Update Student

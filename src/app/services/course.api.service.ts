@@ -11,6 +11,7 @@ import { AuthService } from './auth.service';
 export class CourseApiService {
   coursesRef?: AngularFireList<any>;
   courseRef?: AngularFireObject<any>;
+  myCourses = [];
   constructor(private db: AngularFireDatabase, private crudApi: AuthService) {}
   // Create Course
   AddCourse(course: Course, courseCreator: string) {
@@ -37,7 +38,7 @@ export class CourseApiService {
     //const uid = localStorage.getItem('user')?.search('uid')
     let ref = this.db.database.ref("courses-list");
     return this.courseRef = ref.orderByChild("/creator").equalTo("nXe5lAycwiaQUsak6sBuePYAsrB3").on('child_added', (data) => {
-      console.log('this is the data:',data.val());
+      this.myCourses.push(data.val() as never);
       return data as unknown as  AngularFireObject<any>;
     }) as unknown as AngularFireObject<any>;
    //return this.courseRef!;

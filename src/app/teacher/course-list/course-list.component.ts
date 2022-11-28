@@ -25,7 +25,7 @@ export class CourseListComponent implements OnInit {
   ngOnInit() {
     this.dataState();
     let s = this.crudApi.GetCourseListCreator();
-    console.log('this is s', s);
+    this.Course = this.crudApi.myCourses;
     // s.snapshotChanges().subscribe((data: any) => {
     //   this.Course = [];
     //   data.forEach((item: any) => {
