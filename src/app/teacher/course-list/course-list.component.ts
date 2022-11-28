@@ -26,15 +26,6 @@ export class CourseListComponent implements OnInit {
     this.dataState();
     let s = this.crudApi.GetCourseListCreator();
     this.Course = this.crudApi.myCourses;
-    // s.snapshotChanges().subscribe((data: any) => {
-    //   this.Course = [];
-    //   data.forEach((item: any) => {
-    //     let a = item.payload.toJSON();
-    //     a['$key'] = item.key;
-    //     this.Course?.push(a as Course);
-    //   })
-    // })
-    // this.crudApi.GetCourseListCreator();
   }
   dataState() {
     this.crudApi.GetCourseList().valueChanges().subscribe(data => {

@@ -12,6 +12,10 @@ export class CourseApiService {
   coursesRef?: AngularFireList<any>;
   courseRef?: AngularFireObject<any>;
   myCourses = [];
+  public get currentUser() : string {
+    return JSON.parse(localStorage.getItem('user') as string);
+  }
+
   constructor(private db: AngularFireDatabase, private crudApi: AuthService) {}
   // Create Course
   AddCourse(course: Course, courseCreator: string) {
@@ -35,9 +39,11 @@ export class CourseApiService {
   }
   // Fetch courses List based on creator
   GetCourseListCreator(): AngularFireObject<any> {
-    //const uid = localStorage.getItem('user')?.search('uid')
+    const user = JSON.parse(localStorage.getItem('user') as string);
+    const uid = user.uid
+    console.log(uid)
     let ref = this.db.database.ref("courses-list");
-    return this.courseRef = ref.orderByChild("/creator").equalTo("nXe5lAycwiaQUsak6sBuePYAsrB3").on('child_added', (data) => {
+    return this.courseRef = ref.orderByChild("/creator").equalTo(uid).on('child_added', (data) => {
       this.myCourses.push(data.val() as never);
       return data as unknown as  AngularFireObject<any>;
     }) as unknown as AngularFireObject<any>;
