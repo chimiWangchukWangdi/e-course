@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { FacadeService } from 'src/app/services/facade.service';
+import { AuthFacadeService } from 'src/app/services/auth.facade.service';
 
 @Component({
   selector: 'app-profile',
@@ -9,13 +9,13 @@ import { FacadeService } from 'src/app/services/facade.service';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private facadeService: FacadeService, public authService: AuthService ) { }
+  constructor(private authFacadeService: AuthFacadeService, public authService: AuthService ) { }
 
   ngOnInit(): void {
   }
 
   signOut() {
-    return this.facadeService.signOut()
+    return this.authFacadeService.signOut()
   }
 
 }

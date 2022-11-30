@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/compat/database';
-import * as firebase from 'firebase/compat';
 import { Course } from '../shared/model';
 import { AuthService } from './auth.service';
-
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +9,14 @@ import { AuthService } from './auth.service';
 export class CourseApiService {
   coursesRef?: AngularFireList<any>;
   courseRef?: AngularFireObject<any>;
+  role?: AngularFireObject<any>;
   myCourses = [];
-  public get currentUser() : string {
-    return JSON.parse(localStorage.getItem('user') as string);
+
+  constructor(private db: AngularFireDatabase, private authService: AuthService) {
+   // this.coursesRef = this.db.list(/)
+   this.role = this.db.object('roles');
   }
 
-  constructor(private db: AngularFireDatabase, private crudApi: AuthService) {}
   // Create Course
   AddCourse(course: Course, courseCreator: string) {
     this.coursesRef?.push({
@@ -27,6 +27,7 @@ export class CourseApiService {
       range: course.range,
     });
   }
+
   // Fetch Single Course Object
   GetCourse(id: string) {
     this.courseRef = this.db.object('courses-list/' + id);
@@ -41,7 +42,6 @@ export class CourseApiService {
   GetCourseListCreator(): AngularFireObject<any> {
     const user = JSON.parse(localStorage.getItem('user') as string);
     const uid = user.uid
-    console.log(uid)
     let ref = this.db.database.ref("courses-list");
     return this.courseRef = ref.orderByChild("/creator").equalTo(uid).on('child_added', (data) => {
       this.myCourses.push(data.val() as never);
@@ -63,5 +63,14 @@ export class CourseApiService {
   DeleteCourse(id: string) {
     this.courseRef = this.db.object('courses-list/' + id);
     this.courseRef.remove();
+  }
+
+  setRoles(admin: any, teacher: any, student: any){
+    this.role?.update({admin, teacher, student});
+  }
+
+  getRoles(){
+    this.role = this.db.object('roles');
+    return this.role;
   }
 }

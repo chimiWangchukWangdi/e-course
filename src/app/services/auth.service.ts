@@ -11,11 +11,14 @@ import { Teacher } from '../shared/model';
 export class AuthService {
 
   userData: any; // Save logged in user data
+  array: Array<string[]> = [];
+
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
-    public ngZone: NgZone // NgZone service to remove outside scope warning
+    public ngZone: NgZone, // NgZone service to remove outside scope warning
+    //public apiService: CourseApiService
   ) {
     /* Saving user data in localstorage when
     logged in and setting up null when logged out */
@@ -31,15 +34,22 @@ export class AuthService {
     });
   }
   // Sign in with email/password
-  SignIn(email: string, password: string) {
+  SignIn(email: string, password: string, array: Array<string[]>) {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.SetUserData(result.user);
+        this.array = array;
         this.afAuth.authState.subscribe((user) => {
-          if (user) {
-            this.router.navigate(['/teacher/dashboard']);
+          if (this.array[0].includes(user?.email as string)) {
+            this.router.navigate(['/admin']);
           }
+          else if(this.array[1].includes(user?.email as string)) {
+            this.router.navigate(['/student']);
+          }
+          else if (this.array[2].includes(user?.email as string)) {
+            this.router.navigate(['/teacher/dashboard']);
+          };
         });
       })
       .catch((error) => {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { CourseApiService } from 'src/app/services/course.api.service';
+import { CourseFacadeService } from 'src/app/services/course.facade.service';
 import { Course } from 'src/app/shared/model';
 
 @Component({
@@ -17,14 +18,16 @@ export class DashboardComponent implements OnInit {
   preLoader: boolean = false;
 
   constructor(
-    public crudApi: CourseApiService,
-   // public toastr: ToastrService
-   public authService: AuthService
+    public authService: AuthService,
+    private courseApiService: CourseApiService,
+    private courseFacadeService: CourseFacadeService,
+    // public toastr: ToastrService
+    //public authService: AuthService
     ){ }
 
   ngOnInit() {
     this.dataState();
-    let s = this.crudApi.GetCourseList();
+    let s = this.courseFacadeService.GetCourseList();
     s.snapshotChanges().subscribe(data => {
       this.Course = [];
       data.forEach((item: any) => {
@@ -35,7 +38,7 @@ export class DashboardComponent implements OnInit {
     })
   }
   dataState() {
-    this.crudApi.GetCourseList().valueChanges().subscribe(data => {
+    this.courseFacadeService.GetCourseList().valueChanges().subscribe(data => {
       this.preLoader = false;
       if(data.length <= 0){
         this.hideWhenNoCourse = false;
@@ -48,7 +51,7 @@ export class DashboardComponent implements OnInit {
   }
   deleteCourse(student: Course) {
     if (window.confirm('Are sure you want to delete this Course ?')) {
-      this.crudApi.DeleteCourse(student.$key)
+      this.courseFacadeService.DeleteCourse(student.$key)
      // this.toastr.success(course.firstName + ' successfully deleted!');
     }
   }

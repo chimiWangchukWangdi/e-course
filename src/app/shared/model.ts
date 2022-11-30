@@ -13,6 +13,14 @@ export interface Course {
   creator: string;
   noOfStudents: string
   range: Number;
+  studentsEnrolled: Array<string>;
 }
+
+export interface Role {
+  role?: string;
+  //teacher?: boolean;
+  //admin?: boolean;
+}
+
 
 

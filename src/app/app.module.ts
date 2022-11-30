@@ -9,10 +9,14 @@ import { environment } from 'src/environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { StudentComponent } from './student/student.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    StudentComponent,
+    AdminComponent
     ],
   imports: [
     BrowserModule,

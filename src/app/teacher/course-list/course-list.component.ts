@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { CourseApiService } from 'src/app/services/course.api.service';
+import { CourseFacadeService } from 'src/app/services/course.facade.service';
 import { Course } from 'src/app/shared/model';
 
 @Component({
@@ -17,18 +18,20 @@ export class CourseListComponent implements OnInit {
   preLoader: boolean = false;
 
   constructor(
-    public crudApi: CourseApiService,
-   // public toastr: ToastrService
-   public authService: AuthService
+    public authService: AuthService,
+    private courseApiService: CourseApiService,
+    private courseFacadeService: CourseFacadeService,
+    //public toastr: ToastrService
+    //public authService: AuthService
     ){ }
 
   ngOnInit() {
     this.dataState();
-    let s = this.crudApi.GetCourseListCreator();
-    this.Course = this.crudApi.myCourses;
+    let s = this.courseFacadeService.GetCourseListCreator();
+    this.Course = this.courseApiService.myCourses;
   }
   dataState() {
-    this.crudApi.GetCourseList().valueChanges().subscribe(data => {
+    this.courseApiService.GetCourseList().valueChanges().subscribe(data => {
       this.preLoader = false;
       if(data.length <= 0){
         this.hideWhenNoCourse = false;
@@ -40,10 +43,14 @@ export class CourseListComponent implements OnInit {
     })
   }
   deleteCourse(student: Course) {
-    if (window.confirm('Are sure you want to delete this Course ?')) {
-      this.crudApi.DeleteCourse(student.$key)
+   if (window.confirm('Are sure you want to delete this Course ?')) {
+        this.courseApiService.DeleteCourse(student.$key)
      // this.toastr.success(course.firstName + ' successfully deleted!');
     }
+  }
+
+  newPage(event: any) {
+    this.p = event;
   }
 
 }

@@ -1,5 +1,6 @@
 <div class="displayTable">
   <div class="displayTableCell">
+    <form [formGroup]="characterRoleForm">
     <div class="authBlock">
       <h3>Sign Up</h3>
       <div class="formGroup">
@@ -20,12 +21,27 @@
           required
         />
       </div>
+      <div class="d-grid">
+        <select
+          class="custom-select mb-3"
+          (change)="changeRole($event)"
+          formControlName="characterRole"
+        >
+          <option value="">Choose Role</option>
+          <option *ngFor="let role of Roles" [ngValue]="role">
+            {{ role }}
+          </option>
+        </select>
+        <!-- error block -->
+        <div class="invalid-feedback" *ngIf="isSubmitted && characterRole?.invalid">
+          <sup>*</sup>Please provide character role
+        </div>
       <div class="formGroup">
         <input
           type="button"
           class="btn btnPrimary"
           value="Sign Up"
-          (click)="authService.SignUp(userEmail.value, userPwd.value)"
+          (click)="signUp(userEmail.value, userPwd.value, characterRoleForm)"
         />
       </div>
       <div class="formGroup">
@@ -42,7 +58,7 @@
           Continue with Google
         </button>
       </div>
-    </div>
+  </div>
     <div class="redirectToLogin">
       <span
         >Already have an account?
@@ -50,4 +66,5 @@
       >
     </div>
   </div>
+</form>
 </div>

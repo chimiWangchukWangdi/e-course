@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CourseApiService } from 'src/app/services/course.api.service';
 import {Location} from '@angular/common';
 import { AuthService } from 'src/app/services/auth.service';
+import { CourseFacadeService } from 'src/app/services/course.facade.service';
 
 @Component({
   selector: 'app-edit-course',
@@ -14,7 +15,8 @@ export class EditCourseComponent implements OnInit {
 
   editForm!: FormGroup;
   constructor(
-    private crudApi: CourseApiService,
+    private courseApiService: CourseApiService,
+    private courseFacadeService: CourseFacadeService,
     public authService: AuthService,
     private fb: FormBuilder,
     private location: Location,
@@ -25,7 +27,7 @@ export class EditCourseComponent implements OnInit {
   ngOnInit() {
     this.updateStudentData();
     const id = this.actRoute.snapshot.paramMap.get('id');
-    this.crudApi
+    this.courseFacadeService
       .GetCourse(id!)
       .valueChanges()
       .subscribe((data) => {
@@ -60,7 +62,7 @@ export class EditCourseComponent implements OnInit {
     this.location.back();
   }
   updateForm() {
-    this.crudApi.UpdateCourse(this.editForm?.value);
+    this.courseFacadeService.UpdateCourse(this.editForm?.value);
     // this.toastr.success(
     //   this.editForm?.controls['firstName'].value + ' updated successfully'
     // );
