@@ -24,7 +24,12 @@ export class EditCourseComponent implements OnInit {
     private router: Router,
    //private toastr: ToastrService
   ) {}
+
   ngOnInit() {
+    this.initializer();
+  }
+
+  initializer() {
     this.updateStudentData();
     const id = this.actRoute.snapshot.paramMap.get('id');
     this.courseFacadeService
@@ -34,6 +39,7 @@ export class EditCourseComponent implements OnInit {
         this.editForm?.setValue(data);
       });
   }
+
   get courseTitle() {
     return this.editForm?.get('courseTitle');
   }

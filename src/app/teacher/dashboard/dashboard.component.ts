@@ -26,6 +26,10 @@ export class DashboardComponent implements OnInit {
     ){ }
 
   ngOnInit() {
+    this.initializer();
+  }
+
+  initializer() {
     this.dataState();
     let s = this.courseFacadeService.GetCourseList();
     s.snapshotChanges().subscribe(data => {
@@ -37,6 +41,7 @@ export class DashboardComponent implements OnInit {
       })
     })
   }
+
   dataState() {
     this.courseFacadeService.GetCourseList().valueChanges().subscribe(data => {
       this.preLoader = false;

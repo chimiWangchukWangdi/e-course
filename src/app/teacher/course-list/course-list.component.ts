@@ -26,10 +26,15 @@ export class CourseListComponent implements OnInit {
     ){ }
 
   ngOnInit() {
+    this.initializer();
+  }
+
+  initializer(){
     this.dataState();
     let s = this.courseFacadeService.GetCourseListCreator();
     this.Course = this.courseApiService.myCourses;
   }
+
   dataState() {
     this.courseApiService.GetCourseList().valueChanges().subscribe(data => {
       this.preLoader = false;
@@ -42,6 +47,7 @@ export class CourseListComponent implements OnInit {
       }
     })
   }
+  
   deleteCourse(student: Course) {
    if (window.confirm('Are sure you want to delete this Course ?')) {
         this.courseApiService.DeleteCourse(student.$key)

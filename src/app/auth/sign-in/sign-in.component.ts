@@ -24,12 +24,16 @@ export class SignInComponent implements OnInit {
   constructor(public authFacadeService: AuthFacadeService, private courseApiService: CourseApiService, private courseFacadeService: CourseFacadeService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
-     this.courseFacadeService.getRoles().valueChanges().subscribe(res => {
-        this.admin = res['admin'];
-        this.student = res['student'];
-        this.teacher = res['teacher'];
-        this.array.push(this.admin, this.student, this.teacher)
-    })
+    this.initializer();
+  }
+
+  initializer(){
+    this.courseFacadeService.getRoles().valueChanges().subscribe(res => {
+      this.admin = res['admin'];
+      this.student = res['student'];
+      this.teacher = res['teacher'];
+      this.array.push(this.admin, this.student, this.teacher)
+  })
   }
 
   onFormSubmit(form: FormGroup) {

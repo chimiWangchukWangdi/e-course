@@ -11,8 +11,6 @@ import { CourseFacadeService } from 'src/app/services/course.facade.service';
 })
 export class AddCourseComponent implements OnInit {
 
-
-
   public courseForm!: FormGroup;
   constructor(
     public courseFacadeService: CourseFacadeService,
