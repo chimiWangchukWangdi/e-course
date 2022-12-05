@@ -13,7 +13,6 @@ export class ProfileComponent implements OnInit {
   constructor(private authFacadeService: AuthFacadeService, public authService: AuthService, public courseFacadeService: CourseFacadeService) { }
 
   ngOnInit(): void {
-    this.courseFacadeService.GetStudetsRequestList();
   }
 
   signOut() {
