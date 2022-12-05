@@ -10,7 +10,7 @@ import { CourseFacadeService } from 'src/app/services/course.facade.service';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private authFacadeService: AuthFacadeService, public authService: AuthService, public courseFacadeService: CourseFacadeService) { }
+  constructor(private authFacadeService: AuthFacadeService, public authService: AuthService) { }
 
   ngOnInit(): void {
   }

@@ -99,9 +99,4 @@ export class CourseApiService {
     this.studentsRequest = this.db.object('courses-list/' + id + '/studentsRequest');
     return this.studentsRequest;
   }
-
-  GetStudetsRequestList() {
-    this.studentsRequest = this.db.object('courses-list/' + id + '/studentsRequest');
-    return this.studentsRequest;
-  }
 }
