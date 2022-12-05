@@ -1,0 +1,55 @@
+<div class="dashboard">
+  <!-- Sidebar navigation -->
+  <nav class="side-nav">
+    <h1><a routerLink="/student/dashboard" style="text-decoration: none">Dashboard</a></h1>
+    <div class="nav-items">
+      <ul class="ul-list">
+        <li >
+          <a  routerLink="/student/profile">
+            <i ></i>Student Profile
+          </a>
+        </li>
+        <li >
+          <!-- <a  routerLink="/teacher/register-course" >
+            <i ></i>Add Course
+          </a> -->
+        </li>
+        <li >
+          <!-- <a  routerLink="/teacher/view-courses">
+            <i ></i>My Courses
+          </a> -->
+        </li>
+        <!-- Calling SignOut() Api from AuthService -->
+        <li >
+          <a  (click)="authService.SignOut()">
+            <i ></i>Log out
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+      <!-- Main content -->
+      <main role="main" >
+        <div >
+          <div >
+            <h1 >Student Profile</h1>
+          </div>
+          <!-- Show user data when logged in -->
+          <div  *ngIf="authService.userData as user">
+            <div >
+              <div>
+                <!-- <img  src="{{(user.photoURL) ? user.photoURL : '/assets/dummy-teacher.jpg'}}"
+                  alt="{{user.displayName}}"> -->
+                <div >
+                  <h1>Hello: <strong>{{(user.displayName) ? user.displayName : 'User'}}</strong></h1>
+                  <p>StudentID: <strong>{{user.uid}}</strong></p>
+                  <p>Email: <strong>{{user.email}}</strong></p>
+                  <p>Email Verified: <strong>{{user.emailVerified}}</strong></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+

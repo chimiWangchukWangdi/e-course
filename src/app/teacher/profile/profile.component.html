@@ -49,6 +49,9 @@
             </div>
           </div>
         </div>
+        <div *ngIf="courseFacadeService.GetStudetsRequestList">
+          <h1>Notification: <strong>{{(user.displayName) ? user.displayName : 'User'}}</strong></h1>
+        </div>
       </div>
     </main>
   </div>

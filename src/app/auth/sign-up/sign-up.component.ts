@@ -14,8 +14,8 @@ export class SignUpComponent implements OnInit {
   isSubmitted = false;
   Roles: any = ['Teacher', 'Student', 'Admin'];
   admin: Array<string> = [];
-  teacher: any = [];
-  student: any = [];
+  teacher: Array<string> = [];
+  student: Array<string> = [];
 
   characterRoleForm = this.fb.group({
     characterRole: ['', [Validators.required]],
@@ -30,15 +30,17 @@ export class SignUpComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    //this.facade.setRole([' '], [' '], [' ']);
-    this.getRoles();
+    this.initializer();
   }
 
-  getRoles() {
-    this.authFacadeService
+  initializer() {
+    this.courseFacadeService
       .getRoles()
       .valueChanges()
       .subscribe((res) => {
+        if(!Object.keys(res).length) {
+          this.courseFacadeService.setRoles([' '], [' '], [' ']);
+        }
         this.admin = res['admin'];
         this.student = res['student'];
         this.teacher = res['teacher'];

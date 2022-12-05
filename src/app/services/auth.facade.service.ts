@@ -24,12 +24,4 @@ export class AuthFacadeService {
   signOut() {
     return this.authService.SignOut();
   }
-
-  setRole(admin: any, teacher: any, student: any) {
-    this.courseFacadeService.setRoles(admin, teacher, student);
-  }
-
-  getRoles(){
-    return this.courseFacadeService.getRoles();
-  }
 }

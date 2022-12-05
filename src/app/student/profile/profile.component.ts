@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
 import { AuthFacadeService } from 'src/app/services/auth.facade.service';
-import { CourseFacadeService } from 'src/app/services/course.facade.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -10,10 +9,9 @@ import { CourseFacadeService } from 'src/app/services/course.facade.service';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private authFacadeService: AuthFacadeService, public authService: AuthService, public courseFacadeService: CourseFacadeService) { }
+  constructor(private authFacadeService: AuthFacadeService, public authService: AuthService ) { }
 
   ngOnInit(): void {
-    this.courseFacadeService.GetStudetsRequestList();
   }
 
   signOut() {

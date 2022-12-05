@@ -51,4 +51,15 @@ export class CourseFacadeService {
     return this.courseApiService.getRoles();
   }
 
+  getStudentsRequest(id: string){
+    return this.courseApiService.getStudentsRequest(id);
+  }
+
+  setStudentsRequest(id: string, studentsRequestList: Array<string>){
+    return this.courseApiService.setStudentsRequest(id, studentsRequestList);
+  }
+
+  GetStudetsRequestList(id: string) {
+    return this.courseApiService.GetStudetsRequestList(id);
+  }
 }

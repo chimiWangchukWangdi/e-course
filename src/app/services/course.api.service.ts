@@ -10,11 +10,17 @@ export class CourseApiService {
   coursesRef?: AngularFireList<any>;
   courseRef?: AngularFireObject<any>;
   role?: AngularFireObject<any>;
+  studentsRequest?: AngularFireObject<any>;
   myCourses = [];
+  uid?: string;
 
   constructor(private db: AngularFireDatabase, private authService: AuthService) {
    // this.coursesRef = this.db.list(/)
-   this.role = this.db.object('roles');
+    this.role = this.db.object('roles');
+    if(!!localStorage.getItem('user')) {
+      const user = JSON.parse(localStorage.getItem('user') as string);
+      this.uid = user.uid
+    }
   }
 
   // Create Course
@@ -25,6 +31,8 @@ export class CourseApiService {
       creator: courseCreator,
       noOfStudents: course.noOfStudents,
       range: course.range,
+      studentsRequest: [""],
+      studentsEnrolled: [""],
     });
   }
 
@@ -40,10 +48,8 @@ export class CourseApiService {
   }
   // Fetch courses List based on creator
   GetCourseListCreator(): AngularFireObject<any> {
-    const user = JSON.parse(localStorage.getItem('user') as string);
-    const uid = user.uid
     let ref = this.db.database.ref("courses-list");
-    return this.courseRef = ref.orderByChild("/creator").equalTo(uid).on('child_added', (data) => {
+    return this.courseRef = ref.orderByChild("/creator").equalTo(this.uid!).on('child_added', (data) => {
       this.myCourses.push(data.val() as never);
       return data as unknown as  AngularFireObject<any>;
     }) as unknown as AngularFireObject<any>;
@@ -65,6 +71,10 @@ export class CourseApiService {
     this.courseRef.remove();
   }
 
+  EnrollCourse(id: string, studentsRequest: Array<string>) {
+    this.setStudentsRequest(id, studentsRequest);
+  }
+
   setRoles(admin: any, teacher: any, student: any){
     this.role?.update({admin, teacher, student});
   }
@@ -72,5 +82,26 @@ export class CourseApiService {
   getRoles(){
     this.role = this.db.object('roles');
     return this.role;
+  }
+
+  setStudentsRequest(id: string, studentsRequestList: Array<string>){
+    this.studentsRequest = this.db.object('courses-list/' + id + '/studentsRequest');
+    if (!studentsRequestList.includes(this.uid!)) {
+      studentsRequestList.push(this.uid!);
+    }
+    else {
+      window.alert('You had already enrolled in this course');
+    }
+    this.studentsRequest?.update({studentsRequestList});
+  }
+
+  getStudentsRequest(id:string){
+    this.studentsRequest = this.db.object('courses-list/' + id + '/studentsRequest');
+    return this.studentsRequest;
+  }
+
+  GetStudetsRequestList() {
+    this.studentsRequest = this.db.object('courses-list/' + id + '/studentsRequest');
+    return this.studentsRequest;
   }
 }

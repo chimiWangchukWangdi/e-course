@@ -13,6 +13,7 @@ export interface Course {
   creator: string;
   noOfStudents: string
   range: Number;
+  studentsRequest: Array<string>;
   studentsEnrolled: Array<string>;
 }
 

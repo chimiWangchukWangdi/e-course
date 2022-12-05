@@ -29,10 +29,12 @@ export class SignInComponent implements OnInit {
 
   initializer(){
     this.courseFacadeService.getRoles().valueChanges().subscribe(res => {
-      this.admin = res['admin'];
-      this.student = res['student'];
-      this.teacher = res['teacher'];
-      this.array.push(this.admin, this.student, this.teacher)
+      if(res) {
+        this.admin = res['admin'];
+        this.student = res['student'];
+        this.teacher = res['teacher'];
+        this.array.push(this.admin, this.student, this.teacher)
+      }
   })
   }
 

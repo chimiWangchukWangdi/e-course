@@ -1,1 +1,82 @@
-<p>student dashboard works!</p>
+<div class="dashboard">
+  <!-- Sidebar navigation -->
+  <nav class="side-nav">
+    <h1><a routerLink="/student/dashboard" style="text-decoration: none">Dashboard</a></h1>
+    <div class="nav-items">
+      <ul class="ul-list">
+        <li >
+          <a  routerLink="/student/profile">
+            <i ></i>Student Profile
+          </a>
+        </li>
+        <li >
+          <!-- <a  routerLink="/teacher/register-course" >
+            <i ></i>Add Course
+          </a> -->
+        </li>
+        <li >
+          <!-- <a  routerLink="/teacher/view-courses">
+            <i ></i>My Courses
+          </a> -->
+        </li>
+        <!-- Calling SignOut() Api from AuthService -->
+        <li >
+          <a  (click)="authService.SignOut()">
+            <i ></i>Log out
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <main class="main">
+  <div class="header">
+    <h2 >Courses List</h2>
+      <a href="" routerLink="/register-course"
+      *ngIf="hideWhenNoCourse">Add Courses</a>
+  </div>
+  <div class="content">
+    <div  *ngIf="preLoader">
+      <img src="assets/preloader.gif"  alt="No course" />
+    </div>
+    <div  *ngIf="noData">
+      <!-- <img src="assets/no-course.svg"  alt="No course" /> -->
+      <p >No course added yet!</p>
+      <a routerLink="/register-course" > Add Course </a>
+    </div>
+    <div class="table" *ngIf="hideWhenNoCourse">
+      <table>
+          <tr>
+            <th>Course Name</th>
+            <th>Course Description</th>
+            <th>Course Creator</th>
+            <th>Number of Students</th>
+            <th>Range</th>
+            <th>Enroll</th>
+          </tr>
+          <tr
+            *ngFor="
+              let course of Course!
+                | paginate: { itemsPerPage: 8, currentPage: p };
+              let i = index
+            "
+          >
+            <!-- <th scope="row">{{ course.$key }}</th> -->
+            <td>{{ course.courseTitle }} </td>
+            <td>{{ course.description }}</td>
+            <td>{{ course.creator }}</td>
+            <td>{{ course.noOfStudents }}</td>
+            <td>{{ course.range }}</td>
+            <td>
+              <span
+                (click)="enrollCourse(course)"
+              >click to enroll</span
+              >
+            </td>
+          </tr>
+      </table>
+    </div>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+  </main>
+
+  </div>
